@@ -5,7 +5,7 @@ pipeline {
         // Define Docker Hub credentials ID
         DOCKERHUB_CREDENTIALS_ID = 'viettranni'
         // Define Docker Hub repository name
-        DOCKERHUB_REPO = 'viettranni/tempeture_assignment:latest'
+        DOCKERHUB_REPO = 'viettranni/tempeture_assignment'
         // Define Docker image tag
         DOCKER_IMAGE_TAG = 'latest'
     }
