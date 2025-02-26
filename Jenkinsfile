@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define Docker Hub credentials ID
-        DOCKERHUB_CREDENTIALS_ID = 'dockerhub-credentials'
+        DOCKERHUB_CREDENTIALS_ID = 'viettranni'
         // Define Docker Hub repository name
         DOCKERHUB_REPO = 'viettranni/tempeture_assignment'
         // Define Docker image tag
