@@ -1,6 +1,6 @@
 pipeline {
-    agent any // IN THE LECTURE I WILL EXPLAIN THE SCRIPT AND THE WORKFLOW
-    
+    agent any
+
     environment {
         // Define Docker Hub credentials ID
         DOCKERHUB_CREDENTIALS_ID = 'viettranni'
@@ -9,13 +9,15 @@ pipeline {
         // Define Docker image tag
         DOCKER_IMAGE_TAG = 'latest'
     }
+
     stages {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
-                git branch: 'main', git 'https://github.com/Viettranni/tempeture_week3.git'
+                git branch: 'main', url: 'https://github.com/Viettranni/tempeture_week3.git'
             }
-        }  
+        }
+
         stage('Build Docker Image') {
             steps {
                 // Build Docker image
@@ -24,6 +26,7 @@ pipeline {
                 }
             }
         }
+
         stage('Push Docker Image to Docker Hub') {
             steps {
                 // Push Docker image to Docker Hub
