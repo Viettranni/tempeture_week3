@@ -13,7 +13,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
-                git 'https://github.com/Viettranni/tempeture_week3.git'
+                git branch: 'main', git 'https://github.com/Viettranni/tempeture_week3.git'
             }
         }  
         stage('Build Docker Image') {
