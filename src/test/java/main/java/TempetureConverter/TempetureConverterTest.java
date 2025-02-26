@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import src.main.java.TempetureConverter.TempetureConverter;
+import TempetureConverter.TempetureConverter;
 
 public class TempetureConverterTest {
     @Test

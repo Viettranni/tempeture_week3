@@ -1,4 +1,4 @@
-package src.main.java.TempetureConverter;
+package TempetureConverter;
 
 public class TempetureConverter {
     private double celcius;
@@ -28,5 +28,15 @@ public class TempetureConverter {
             return true;
         } 
         return false;
+    }
+
+    public static void main(String[] args) {
+        TempetureConverter converter = new TempetureConverter();
+        
+        // Example calls to the methods
+        System.out.println("Fahrenheit to Celsius (50.0°F): " + converter.fahrenheitToCelsius(50.0));
+        System.out.println("Celsius to Fahrenheit (10.0°C): " + converter.celsiusToFahrenheit(10.0));
+        System.out.println("Kelvin to Fahrenheit (283.15K): " + converter.kelvinToFah(283.15));
+        System.out.println("Is 100.0°C an extreme temperature? " + converter.isExtremeTemperature(100.0));
     }
 }
