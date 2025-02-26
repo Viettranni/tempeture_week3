@@ -11,18 +11,6 @@ pipeline {
     }
 
     stages {
-        stage('Debug PATH') {
-            steps {
-                sh 'echo $PATH'
-            }
-        }
-        
-        stage('Check Docker') {
-            steps {
-                sh 'docker --version'
-            }
-        }
-
         stage('Checkout') {
             steps {
                 // Checkout code from Git repository
@@ -32,8 +20,9 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                // Build Docker image
+                // Ensure Docker is using the default context
                 script {
+                    sh 'docker context use default' // Switch to default context
                     docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
                 }
             }
@@ -44,10 +33,8 @@ pipeline {
                 // Push Docker image to Docker Hub
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                    // Docker commands (build, push, etc.) will automatically use the default Docker context
-                    docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
-                }
-
+                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                    }
                 }
             }
         }
