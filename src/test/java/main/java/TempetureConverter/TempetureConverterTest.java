@@ -22,6 +22,13 @@ public class TempetureConverterTest {
     }
 
     @Test
+    void testkelvinToFah() {
+        TempetureConverter t = new TempetureConverter();
+        double result = t.kelvinToFah(10.0);
+        assertEquals(-231.0, result);
+    }
+
+    @Test
     void testIsExtremeTemperatureFalse() {
         TempetureConverter t = new TempetureConverter();
         boolean result = t.isExtremeTemperature(25.0);
