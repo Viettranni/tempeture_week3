@@ -2,49 +2,44 @@ pipeline {
     agent any
 
     environment {
-        // Define Docker Hub credentials ID
         DOCKERHUB_CREDENTIALS_ID = 'viettranni'
-        // Define Docker Hub repository name
         DOCKERHUB_REPO = 'viettranni/tempeture_assignment'
-        // Define Docker image tag
         DOCKER_IMAGE_TAG = 'latest'
     }
 
     stages {
+        stage('Check Docker') {
+            steps {
+                sh '/Applications/Docker.app/Contents/Resources/bin/docker --version'
+            }
+        }
+
         stage('Debug PATH') {
             steps {
                 sh 'echo $PATH'
-            }
-        }
-        
-        stage('Check Docker') {
-            steps {
-                sh 'docker --version'
+                sh 'which docker'
             }
         }
 
         stage('Checkout') {
             steps {
-                // Checkout code from Git repository
                 git branch: 'main', url: 'https://github.com/Viettranni/tempeture_week3.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                // Build Docker image
                 script {
-                    docker.build("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}")
+                    sh '/Applications/Docker.app/Contents/Resources/bin/docker build -t ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} .'
                 }
             }
         }
 
         stage('Push Docker Image to Docker Hub') {
             steps {
-                // Push Docker image to Docker Hub
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS_ID) {
-                        docker.image("${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}").push()
+                        sh '/Applications/Docker.app/Contents/Resources/bin/docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}'
                     }
                 }
             }
